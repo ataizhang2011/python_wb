@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MainPage of WorkingBetter</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+</head>
+
+<body>
+    {% include "header_main.html" %}
+    <main>
+        <div id="bienvenido">
+            {% include "div_add.html" %}
+            <div id="container_tareas">
+                <div id="frontend_list" class="tarea_div">
+                    <div class="list_title"><h3>Frontend</h3><p>{{ todo_frontend }}</p></div>
+                    <div class="list_content">
+                        {% for tarea in tareas_frontend %}
+                            {% if id_editar %}
+                                {% include "ul_editar.html" %}
+                            {% else %}
+                                {% include "ul_main.html" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="backend_list" class="tarea_div">
+                   <div class="list_title"><h3>Backend</h3><p>{{ todo_backend }}</p></div>
+                   <div class="list_content"> 
+                        {% for tarea in tareas_backend %}
+                            {% if id_editar %}
+                                {% include "ul_editar.html" %}
+                            {% else %}
+                                {% include "ul_main.html" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="design_list" class="tarea_div">
+                   <div class="list_title"><h3>Diseñado</h3><p>{{ todo_dise }}</p></div>
+                   <div class="list_content">
+                        {% for tarea in tareas_dise %}
+                            {% if id_editar %}
+                                {% include "ul_editar.html" %}
+                            {% else %}
+                                {% include "ul_main.html" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="foto_list" class="tarea_div">
+                    <div class="list_title"><h3>Fotografia</h3><p>{{ todo_fotos }}</p></div>
+                    <div class="list_content">
+                        {% for tarea in tareas_fotos %}
+                            {% if id_editar %}
+                                {% include "ul_editar.html" %}
+                            {% else %}
+                                {% include "ul_main.html" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div id="database_list" class="tarea_div">
+                    <div class="list_title"><h3>Base de datos</h3><p>{{ todo_database }}</p></div>
+                    <div class="list_content">
+                        {% for tarea in tareas_database %}
+                            {% if id_editar %}
+                                {% include "ul_editar.html" %}
+                            {% else %}
+                                {% include "ul_main.html" %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <nav id="menu_side">               
+                <ul>
+                    <span id="burger" onclick="muestraMenu()">&#9776;</span>
+                    {% for usuario in usuarios %}
+                    <li class="img_li">
+                        <form action="/main_usuario" method="POST">
+                            <input type="hidden" name="id_usuario" value="{{ usuario.id_usuario }}">
+                            <button type="submit" class="btn">
+                                <img src="{{ url_for('static', filename=usuario.img_ruta) }}" alt="{{ usuario.usuario }}">
+                            </button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </main>
+{% include "footer.html" %}
+</body>
+</html>

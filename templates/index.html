@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Better</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+
+</head>
+
+<body>
+    {% include "header.html" %}
+    <main>
+        <div class="index_main">
+            {% include "sectionleft.html" %}
+            <section id="form_section">
+                <form action="/login" method="POST" name="form_login">
+                    <h2>Formulario de Inicio de Sesión</h2>
+                    <div>
+                        <label for="user" name="user">Usuario:</label><br>
+                        <input type="text" name="user" id="user">
+                    </div>
+                    <div>
+                        <label for="pass" name="pass">Contraseña:</label><br>
+                        <input type="password" name="pass" id="pass">
+                    </div>
+                    <div>
+                        <p id="error_login"></p>
+                        {% if error_login %}
+                            <p>{{ error_login }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <button type="submit">Ingresar</button><br>
+                        <a href="/registro">¿No tienes cuenta?Registrate aquí</a>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+    {% include "footer.html" %}
+</body>
+</html>

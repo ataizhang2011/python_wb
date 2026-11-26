@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</head>
+
+<body>
+    {% include "header.html" %}
+<main>
+    <div class="index_main">
+        {% include "sectionleft.html" %}
+        <section id="reg_section" class="reg_section">
+            <form action="/registado" method="POST" name="form_registro" id="form_registro" enctype="multipart/form-data">
+                <h2>Formulario de registro</h2>
+                <div>
+                    <label for="nombre" name="nombre">Nombre real:</label><br>
+                    <input type="text" name="nombre" id="nombre">
+                </div>
+                <div>
+                    <label for="apellido" name="apellido">Apellido real:</label><br>
+                    <input type="text" name="apellido" id="apellido">
+                </div>
+                <div>
+                    <label for="email" name="email">Correo electrónico:</label><br>
+                    <input type="email" name="email" id="email">
+                    <p id="error-email"></p>
+                </div>
+                <div>
+                    <label for="alias" name="alias">Alias de usuario:</label><br>
+                    <input type="text" name="alias" id="alias">
+                </div>
+                <div>
+                    <label for="password" name="password">Contraseña:</label><br>
+                    <input type="password" name="password" id="password" minlength="8" maxlength="10">
+                    <p id="error-password"></p>
+                </div>
+                <div>
+                    <label for="password2" name="password2">Confirmar contraseña:</label><br>
+                    <input type="password" name="password2" id="password2" minlength="8" maxlength="10">
+                    <p id="error-password"></p>
+                </div>
+                <div>
+                    <label for="imagen">Imagen de perfil:</label>
+                    <input type="file" name="imagen" id="imagen"
+                        accept=".jpg,.jpeg,.png,.webp,.avif,image/jpeg,image/png,image/webp,image/avif"
+                        required>
+                </div>
+                <div>
+                {% if error_registro %}
+                    <p>{{ error_registro }}</p>
+                {% endif %}    
+                </div>
+                <div>
+                    <button type="submit">Enviar datos</button><br>
+                    <a href="/">Cancelar registro</a>
+                </div>
+            </form>
+        </section>
+    </div>    
+</main>
+    {% include "footer.html" %}
+</body>
+</html>

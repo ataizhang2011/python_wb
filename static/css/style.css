@@ -1,0 +1,404 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+:root {
+--primary-color: #007bff;
+--primary-color-dark: #014691;
+--secondary-color: #6c757d;
+--main-background-color: #f4f4f4;
+}
+/* -------------------------------------------style of header----------------- */
+header {
+    background-color: var(--primary-color);
+    color: var(--main-background-color);
+    /* text-align: left; */
+}
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px;
+}
+#header_main {
+    display: flex;
+    justify-content: space-between;
+    div {
+        display: flex;
+        img {
+            width:60px;
+            height: 60px;
+        }
+    }
+    #info_container {
+        width: 150px;
+        display: flex;
+        justify-content: space-evenly;
+        p {
+            text-align: center;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            padding: 18px;
+        }
+        .img_usuario {
+            width: 40px;
+            height: 40px;
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+        }
+        #edit_div {
+            padding: 8px;
+            width: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            gap: 5px;
+            form {
+                button {
+                    cursor: pointer;
+                    user-select: none;
+                }
+            }
+        }
+    }
+    #edit_div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+/* -------------------------------------------style of footer----------------- */
+footer {
+    background-color: var(--primary-color);
+    color: var(--main-background-color);
+    text-align: center;
+    padding: 10px;
+    p {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: .8rem;
+    }
+}
+/* -------------------------------------------main of index----------------- */
+.index_main {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--main-background-color);
+}
+#left_container {
+    text-align: center;
+    padding: 50px;
+    margin: 50px auto;
+    border-right: solid 1px var(--primary-color);
+}
+#form_section {
+    /* padding:120px; */
+    form {
+        margin: 90px 90px;
+        margin-bottom: 20px;
+        width: 280px;
+        height: 280px;
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        h2 {
+            color: var(--primary-color);
+            font-weight: 100;
+            font-size: 1rem;
+        }
+        div:first-of-type {
+            margin-top: 10px;
+        }
+        div {
+            padding: 5px;
+            label {
+                font-size: .8rem;
+            }
+            input {
+                width: 100%;
+                border-radius: 5px;
+            }
+            button {
+                margin-top: 20px; 
+                width: 100%;
+                background-color: #007bff;
+                border-radius: 5px;
+                border: none;
+                color: var(--main-background-color);
+                padding: 5px;
+                cursor: pointer;
+                user-select: none;
+            }
+            a {
+                text-decoration: none;
+                font-size: .8rem;
+                text-align: center;
+                padding: 8px;
+                margin-bottom: 5px;
+            }
+            p {
+            color:red;
+            }
+        }
+
+    }
+}
+/* -------------------------------------------section of registro----------------- */
+.reg_section {
+    padding:90px;
+    form {
+        margin: auto 0;
+        width: 280px;
+        height: 380px;
+        background-color: white;
+        border-radius: 15px;
+        padding: 20px;
+        font-family: Arial, Helvetica, sans-serif;
+        h2 {
+            color: var(--primary-color);
+            font-weight: 100;
+            font-size: 1rem;
+        }
+        div:first-of-type {
+            margin-top: 10px;
+        }
+        div {
+            padding: 5px;
+            label {
+                font-size: .8rem;
+            }
+            input {
+                width: 100%;
+                border-radius: 5px;
+            }
+            button {
+                margin-top: 20px; 
+                width: 100%;
+                background-color: #007bff;
+                border-radius: 5px;
+                border: none;
+                color: var(--main-background-color);
+                padding: 5px;
+                cursor: pointer;
+                user-select: none;
+            }
+            a {
+                text-decoration: none;
+                display: block;
+                font-size: .8rem;
+                text-align: center;
+                padding: 8px;
+                margin-bottom: 8px;
+                color:#007bff;
+                text-align: center;
+            }
+        }
+
+    }
+}
+/* -------------------------------------------style of menu de main.php----------------- */
+#menu_side {
+    width: 60px;
+    height: 100%;
+    ul {
+        height: 100%;
+        padding: 10px;
+        background-color:#014691;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        #burger {
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .img_li {
+            list-style: none;
+            margin-top: 20px;
+            cursor: pointer;
+            user-select: none;
+            img {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                overflow: hidden;
+            }
+            button {
+                background-color: var(--primary-color-dark);
+            }
+            a {
+                text-align: center;
+                text-decoration: none;
+                color: white;
+                font-size: 1.5rem;
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+    }
+}
+/* -------------------------------------------style of main.php----------------- */
+#bienvenido {
+    width: 100%;
+    min-width: 1200px;
+    /* position: relative; */
+    display: flex;
+    background-color: var(--main-background-color);
+    height: 800px;
+}
+#container_tareas {
+    width: 100%;
+    height: 100%;   
+    display: flex;
+    justify-content: space-evenly;
+}
+.tarea_div {
+    width: 20%; 
+}
+#frontend_list {
+    background-color:#3ea4fd;
+    .list_title {
+        background-color:#30a0f0;
+    }
+}
+#backend_list {
+    background-color:#54b2be;
+    .list_title {
+        background-color:#50b0b0;
+    }
+}
+#design_list {
+    background-color:#8c86e5;
+    .list_title {
+        background-color:#8080e0;
+    }
+}
+#foto_list {
+    background-color:#54b2bf;
+    .list_title {
+        background-color:#50b0b0;
+    }
+}
+#database_list {
+    background-color:#63bb8c;
+    .list_title {
+        background-color:#60b080;
+    }
+}
+.list_title {
+    padding: 15px;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    color: #f4f4f4;
+    background-color:#30a0f0;
+}
+.list_content {
+    padding: 20px;
+    ul {
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        li {
+            padding: 8px;
+            list-style: none;
+        }
+    }    
+}
+/* ------------------------ style of add_tarea --------------------------- */
+
+#add_tarea {
+    background-color:var(--primary-color-dark);
+    color: white;
+    width: 300px;
+    height: 450px;
+    position: fixed;
+    top: 60px;
+    right: -350px;
+    transition: .5s;
+    padding: 50px;
+    border-radius: 5px;
+    h2 {
+        text-align: center;
+    }
+}
+#form_anadar {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    input {
+        width: 100%;
+    }
+}
+#descripcion {
+    width: 100%;
+    height: 20px;
+    resize: none;
+}
+#error_add {
+    color: red;
+}
+#li_x {
+    display: flex;
+    justify-content: space-between;
+}
+#pencil_x {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 5px;
+}
+.btn {
+    border: none;
+    background-color: var(--main-background-color);
+    cursor: pointer;
+    user-select: none;
+}
+/* ------------------------ style of editar_tarea --------------------------- */
+#li_pro {
+    display: flex;
+    justify-content: space-between;
+}
+#editar_tarea {
+    padding: 8px;
+}
+#form_editar {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    input {
+        width: 100%;
+    }
+    button {
+        padding: 3px;
+        cursor: pointer;
+        user-select: none;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    a {
+        text-decoration: none;
+        padding: 3px;
+        color: black;
+        border: 1px solid black;
+        border-radius: 3px;
+        font-size: 15px;
+        font-weight: 400;
+    }
+    .btn_cc {
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}

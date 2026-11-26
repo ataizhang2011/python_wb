@@ -1,0 +1,22 @@
+<ul>
+    <li id="li_x">
+        <span>{{ tarea.nombre_tarea }}</span>
+        <div id="pencil_x">
+            <div>
+                <form action="/main_editar" method="POST">
+                    <input type="hidden" name="id_tarea" value="{{ tarea.id_tarea }}">
+                    <button type="submit" class="btn"><i class="bi bi-pencil-fill color_adaptado"></i></button>
+                </form>
+            </div>
+            <div>
+                <form action="/delete" method="POST">
+                    <input type="hidden" name="id_tarea" value="{{ tarea.id_tarea }}">
+                    <button type="submit" class="btn">X</button>
+                </form>
+            </div>
+        </div>
+    </li>
+    <li>{{ tarea.descripcion_tarea }}</li>
+    <li><span>{{ tarea.nombre_estado }}</span><span><small> | {{ tarea.fecha_actua }}</small></span></li>
+    <li id="li_pro"><span>{{ tarea.nombre_proyecto }}</span><span>{{ tarea.assigned_to }}</span></li>
+</ul>

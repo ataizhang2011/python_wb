@@ -1,0 +1,27 @@
+    <header id="header_main">
+        <div>
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="logo">
+            <h1>Working Better</h1>
+        </div>
+        <div id="info_container">
+            <div id="alias_div">
+                <p>{{ alias }}</p>
+            </div>
+            <div class="img_usuario">
+                <img src="{{ url_for('static', filename=img_ruta) }}" alt="{{ alias }}">
+            </div>
+            <div id="edit_div">
+                <form action="/logout" method="POST">
+                    <button type="submit">
+                        <i class="bi bi-box-arrow-right color_adaptado"></i>
+                    </button>
+                </form>
+                <form action="/modificar" method="POST">
+                    <input type="hidden" name="accion_update" value="editar">
+                    <button type="submit">
+                        <i class="bi bi-gear color_adaptado"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </header>

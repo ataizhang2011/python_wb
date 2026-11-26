@@ -1,0 +1,55 @@
+<div id="add_tarea">
+    <form action="/add" method="POST" name="form_anadar" id="form_anadar">
+        <h2>Anadar tarea</h2>
+        <div>
+            <label for="tarea" name="tarea">Nombre tarea:</label><br>
+            <input type="text" name="tarea" id="tarea">
+        </div>
+        {% if tarea_existe %}
+            <p id="error_add">{{ tarea_existe }}</p>
+        {% endif %}  
+        <div>
+            <label for="proyecto" name="proyecto">Nombre proyecto:</label><br>
+            <input type="text" name="proyecto" id="proyecto">
+        </div>
+        <div>
+            <label for="descripcion" name="descripcion">Descripcion:</label><br>
+            <textarea id="descripcion" name="descripcion"></textarea>
+        </div>
+        <div>
+            <label for="tipo" name="tipo">Tipo:</label><br>
+            <input list="tipo" name="tipo" placeholder="Eligir el tipo"/> 
+            <datalist id="tipo">
+                <option value="frontend">Frontend</option>
+                <option value="backend">Backend</option>
+                <option value="diseñado">Diseñado</option>
+                <option value="fotografia">Fotografia</option>
+                <option value="database">Base de datos</option>
+            </datalist>
+        </div>
+        <div>
+            <label for="estado" name="estado">Estado:</label><br>
+            <input list="estado" name="estado" placeholder="Eligir el estado"/>
+            <datalist id="estado">
+                <option value="pendiente">pendiente</option>
+                <option value="en curso">en curso</option>
+                <option value="finalizado">finalizado</option>
+            </datalist>
+        </div>
+        <div>
+            <label for="usuario" name="usuario">Asigned to:</label><br>
+            <input list="usuario" name="usuario" placeholder="Eligir un usuario"/>  
+                <datalist id="usuario">
+                {% for usuario in usuarios %}
+                    <option value="{{ usuario.usuario }}">{{ usuario.usuario }}</option>
+                {% endfor %}
+                </datalist>
+        </div>
+        {% if error_add %}
+            <p id="error_add">{{ error_add }}</p>
+        {% endif %}
+        <div>
+            <button type="submit">Anadar</button><br>
+        </div>
+    </form>
+</div>

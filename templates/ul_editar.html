@@ -1,0 +1,64 @@
+<ul>
+    <li id="li_x">
+        <span>{{ tarea.nombre_tarea }}</span>
+        <div id="pencil_x">
+            <div>
+                <form action="/main_editar" method="POST">
+                    <input type="hidden" name="id_tarea" value="{{ tarea.id_tarea }}">
+                    <button type="submit" class="btn"><i class="bi bi-pencil-fill color_adaptado"></i></button>
+                </form>
+            </div>
+            <div>
+                <form action="/delete" method="POST">
+                    <input type="hidden" name="id_tarea" value="{{ tarea.id_tarea }}">
+                    <button type="submit" class="btn">X</button>
+                </form>
+            </div>
+        </div>
+    </li>
+
+    {% if tarea.id_tarea == id_editar %}
+    <div id="editar_tarea">
+        <form action="/editar" method="POST" name="form_editar" id="form_editar">
+            <input type="hidden" name="id_tarea" value="{{ tarea.id_tarea }}">
+            <div>
+                <label for="proyecto" name="proyecto">Nombre proyecto:</label><br>
+                <input type="text" name="proyecto" id="proyecto" value="{{ tarea.nombre_proyecto }}">
+            </div>
+            <div>
+                <label for="descripcion" name="descripcion">Descripcion:</label><br>
+                <textarea id="descripcion" name="descripcion">{{ tarea.descripcion_tarea }}</textarea>
+            </div>
+           <div>
+                <label for="estado">Estado:</label><br>
+                <select name="estado" id="estado">
+                    <option value="pendiente" {% if tarea.nombre_estado == 'pendiente' %}selected{% endif %}>pendiente</option>
+                    <option value="en curso" {% if tarea.nombre_estado == 'en curso' %}selected{% endif %}>en curso</option>
+                    <option value="finalizado" {% if tarea.nombre_estado == 'finalizado' %}selected{% endif %}>finalizado</option>
+                </select>
+            </div>
+            <div>
+                <label for="usuario">Asigned to:</label><br>
+                <select name="usuario" id="usuario">
+                    {% for usuario in usuarios %}
+                        <option value="{{ usuario.usuario }}" {% if tarea.assigned_to == usuario.usuario %}selected{% endif %}>
+                            {{ usuario.usuario }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            {% if error_editar %}
+                <p id="error_editar">{{ error_editar }}</p>
+            {% endif %}
+            <div class="btn_cc">
+                <button type="submit">Confirmar</button><br>
+                <a href="/main">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    {% else %}
+    <li>{{ tarea.descripcion_tarea }}</li>
+    <li><span>{{ tarea.nombre_estado }}</span><span><small> | {{ tarea.fecha_actua }}</small></span></li>
+    <li id="li_pro"><span>{{ tarea.nombre_proyecto }}</span><span>{{ tarea.assigned_to }}</span></li>
+    {% endif %}
+</ul>
