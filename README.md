@@ -1,4 +1,3 @@
-<img width="658" height="358" alt="architecture" src="https://github.com/user-attachments/assets/d333306e-1705-4675-90b1-ecdf725b2865" />WorkingBetter - Task & Project Management System (Flask Edition)
 
 WorkingBetter is a full-stack Kanban task and project management web application. Originally built in native PHP, this project has been fully refactored and migrated to Python (Flask) using a modular Blueprint architecture and SQLAlchemy ORM.
 WorkingBetter es una aplicación web full-stack para la gestión de tareas y proyectos estilo Kanban. Desarrollada originalmente en PHP nativo, esta versión ha sido completamente refactorizada y migrada a Python (Flask) utilizando una arquitectura modular con Blueprints y SQLAlchemy ORM.
@@ -19,6 +18,8 @@ Tech Stack | Tecnologías Utilizadas
 • Frontend: HTML5, CSS3, Jinja2 Templates
 
 Project Structure | Estructura del Proyecto
+<img width="658" height="358" alt="architecture" src="https://github.com/user-attachments/assets/d333306e-1705-4675-90b1-ecdf725b2865" />WorkingBetter - Task & Project Management System (Flask Edition)
+
 ![Uploading ar<svg class="light" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 658 358" width="658" height="358" id="m0e6f38__root" data-diagram-type="ascii">
   <style data-mercat-style="universal">.mercat text{font-family:'Google Sans',Roboto,Arial,sans-serif;fill:var(--m-text);dominant-baseline:central}.mercat .m-edge .m-path{fill:none;stroke:var(--m-line);stroke-width:1.5px}.mercat .m-note .m-label{fill:var(--m-note-text)}.mercat .t-label{font-size:13px;font-weight:500}</style>
   <style data-mercat-style="theme-light">#m0e6f38__root{--m-text:#1f1f1f;--m-line:#545454;--m-note-text:#1f1f1f}</style>
