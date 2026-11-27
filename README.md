@@ -43,7 +43,13 @@ venv\Scripts\activate
 
 pip install -r requirements.txt
 
-4. Configure environment variables | Configurar variables de entorno
+4. Initialize the database | Inicializar la base de datos
+   Create an empty MySQL database (e.g., `working_better`) and import the `schema.sql` script to create the tables and required initial records:
+
+mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS working_better CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+mysql -u root -p working_better < schema.sql
+
+5. Configure environment variables | Configurar variables de entorno
 
 Create a .env file in the root directory based on .env.example and fill in your MySQL credentials:
 
@@ -53,7 +59,7 @@ DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=working_better
 
-5. Run the application | Ejecutar la aplicación
+6. Run the application | Ejecutar la aplicación
 
 python app.py
 Open your browser and navigate to http://127.0.0.1:5000.

@@ -12,8 +12,12 @@ class Usuario(db.Model):
     alias_usuario = db.Column(db.String(100), unique=True, nullable=False)
     password_user = db.Column(db.String(255), nullable=False)
     img_ruta = db.Column(db.String(255))
+    creado_en = db.Column(db.DateTime, server_default=db.func.now())
+    estado = db.Column(db.Integer, default=1)
 
     tareas = db.relationship("Tarea", back_populates="usuario")
+
+    
 
     @property
     def usuario(self):
@@ -25,6 +29,7 @@ class Proyecto(db.Model):
 
     id_proyecto = db.Column(db.Integer, primary_key=True)
     nombre_proyecto = db.Column(db.String(150), unique=True, nullable=False)
+    descripcion_proyecto = db.Column(db.String(300))
 
     tareas = db.relationship("Tarea", back_populates="proyecto")
 
