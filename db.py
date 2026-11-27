@@ -1,68 +1,26 @@
-import os
-from dotenv import load_dotenv
-import pymysql
-
-load_dotenv()
-
-def get_db_connection():
-    return pymysql.connect(
-        host=os.getenv("DB_HOST"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_NAME"),
-        port=3306,
-        charset="utf8mb4",
-        cursorclass=pymysql.cursors.DictCursor,
-    )
+from sqlalchemy.orm import joinedload
+from models import Tarea, Usuario
 
 def obtener_datos_dashboard(id_usuario=None):
-    conn = get_db_connection()
-    try:
-        with conn.cursor() as cursor:
-            sql_tareas = """
-                SELECT t.id_tarea, t.nombre_tarea, p.nombre_proyecto, t.descripcion_tarea, 
-                       tp.nombre_tipo, t.id_estado, t.id_usuario,
-                       CONCAT(u.nombre_usuario, " ", u.apellido_usuario) AS assigned_to, 
-                       u.alias_usuario, u.img_ruta, t.fecha_ini, t.fecha_actua, e.nombre_estado
-                FROM tareas t
-                NATURAL JOIN proyectos p
-                NATURAL JOIN tipos tp
-                NATURAL JOIN usuarios u
-                NATURAL JOIN estados e
-            """
-            if id_usuario:
-                sql_tareas += " WHERE u.id_usuario = %s"
-                cursor.execute(sql_tareas, (id_usuario,))
-            else:
-                cursor.execute(sql_tareas)
+    # Utiliza `joinedload` para cargar de forma anticipada las tablas relacionadas; su rendimiento es equivalente al de un `JOIN` de SQL nativo.
+    query = Tarea.query.options(
+        joinedload(Tarea.proyecto),
+        joinedload(Tarea.tipo),
+        joinedload(Tarea.usuario),
+        joinedload(Tarea.estado),
+    )
 
-            todas_tareas = cursor.fetchall()
+    if id_usuario:
+        query = query.filter(Tarea.id_usuario == id_usuario)
 
-            sql_usuarios = """
-                SELECT id_usuario, CONCAT(nombre_usuario, " ", apellido_usuario) AS usuario, img_ruta
-                FROM usuarios
-            """
-            cursor.execute(sql_usuarios)
-            usuarios = cursor.fetchall()
+    todas_tareas = query.all()
+    usuarios = Usuario.query.all()
 
-    finally:
-        conn.close()
-
-    tareas_frontend = [
-        t for t in todas_tareas if t["nombre_tipo"].lower() == "frontend"
-    ]
-    tareas_backend = [
-        t for t in todas_tareas if t["nombre_tipo"].lower() == "backend"
-    ]
-    tareas_dise = [
-        t for t in todas_tareas if t["nombre_tipo"].lower() == "diseñado"
-    ]
-    tareas_fotos = [
-        t for t in todas_tareas if t["nombre_tipo"].lower() == "fotografia"
-    ]
-    tareas_database = [
-        t for t in todas_tareas if t["nombre_tipo"].lower() == "database"
-    ]
+    tareas_frontend = [t for t in todas_tareas if t.nombre_tipo.lower() == "frontend"]
+    tareas_backend = [t for t in todas_tareas if t.nombre_tipo.lower() == "backend"]
+    tareas_dise = [t for t in todas_tareas if t.nombre_tipo.lower() == "diseñado"]
+    tareas_fotos = [t for t in todas_tareas if t.nombre_tipo.lower() == "fotografia"]
+    tareas_database = [t for t in todas_tareas if t.nombre_tipo.lower() == "database"]
 
     return {
         "tareas_frontend": tareas_frontend,
@@ -77,4 +35,3 @@ def obtener_datos_dashboard(id_usuario=None):
         "todo_database": len(tareas_database),
         "usuarios": usuarios,
     }
-
