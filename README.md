@@ -1,104 +1,67 @@
-# WorkingBetter (Versión Python / Flask)
+WorkingBetter - Task & Project Management System (Flask Edition)
 
-Aplicación web de gestión de tareas estilo Kanban desarrollada originalmente en **PHP nativo (PDO)** y migrada completamente a **Python** utilizando el microframework **Flask**.
+WorkingBetter is a full-stack Kanban task and project management web application. Originally built in native PHP, this project has been fully refactored and migrated to Python (Flask) using a modular Blueprint architecture and SQLAlchemy ORM.
+WorkingBetter es una aplicación web full-stack para la gestión de tareas y proyectos estilo Kanban. Desarrollada originalmente en PHP nativo, esta versión ha sido completamente refactorizada y migrada a Python (Flask) utilizando una arquitectura modular con Blueprints y SQLAlchemy ORM.
 
-Este proyecto demuestra la transición arquitectónica desde scripts procedurales hacia una estructura modular MVC/MTV, optimizando consultas a bases de datos en la nube y aplicando buenas prácticas de seguridad.
+Key Features & Architecture Highlights | Características y Arquitectura
 
----
+• Modular Blueprint Architecture | Arquitectura Modular (Blueprints): Decoupled routes into auth, tareas, and usuario modules for clean separation of concerns and scalability.
+• SQLAlchemy ORM & N+1 Prevention | ORM y Optimización de Consultas: Replaced raw SQL queries with relational models (Usuario, Tarea, Proyecto, Tipo, Estado) utilizing joinedload for efficient eager loading.
+• Cross-Language Password Compatibility | Compatibilidad de Contraseñas: Seamless authentication supporting legacy PHP $2y$ bcrypt hashes alongside standard $2b$ hashes.
+• Secure File Uploads | Subida Segura de Archivos: Avatar validation by file extension and MIME type, UUID renaming, and automatic cleanup of previous profile images.
+• Kanban Task Filtering | Filtrado Dinámico de Tareas: Categorizes tasks by department (Frontend, Backend, Diseño, Fotografía, Database) and supports filtering by assigned team member.
 
-## Características Principales
+Tech Stack | Tecnologías Utilizadas
 
-- **Autenticación y Gestión de Sesiones:** Registro de nuevos usuarios, inicio y cierre de sesión con protección de rutas mediante `session`.
-- **Seguridad de Contraseñas:** Cifrado y verificación compatible con hashes de PHP (`$2y$` / `$2b$`) utilizando `bcrypt`.
-- **Subida y Validación de Archivos:** Gestión de avatares de perfil con validación de extensiones, tipos MIME y generación de nombres únicos (`uuid`).
-- **CRUD Completo de Tareas:**
-  - **Create:** Creación de tareas con validación de duplicados y creación automática de proyectos nuevos.
-  - **Read:** Tablero visual dividido en 5 categorías (_Frontend, Backend, Diseño, Fotografía, Base de datos_) con contadores dinámicos y filtrado por usuario.
-  - **Update:** Edición en línea (_inline editing_) directamente desde la tarjeta de cada tarea, además de actualización de datos y avatar del perfil de usuario.
-  - **Delete:** Eliminación segura de tareas con confirmación de transacción.
+• Backend: Python 3, Flask, Flask-SQLAlchemy
+• Database: MySQL (PyMySQL driver)
+• Security: Bcrypt, Python-dotenv, Custom @login_required Decorators
+• Frontend: HTML5, CSS3, Jinja2 Templates
 
----
+Project Structure | Estructura del Proyecto
 
-## Mejoras Técnicas respecto a la versión PHP
+Local Setup & Installation | Instalación y Ejecución Local
 
-1. **Optimización de Consultas SQL:** En la versión original en PHP se realizaban 11 consultas independientes para obtener las tareas y contadores por categoría. En Python se redujo a **una única consulta `JOIN`** y se agruparon los resultados en memoria mediante _List Comprehensions_, reduciendo drásticamente la latencia con la base de datos remota.
-2. **Separación de Responsabilidades:** División clara entre la lógica de negocio (`app.py`), la capa de acceso a datos (`db.py`) y la presentación mediante el motor de plantillas **Jinja2** (`templates/`).
-3. **Gestión de Transacciones:** Implementación de `commit()` y `rollback()` explícitos para garantizar la integridad de los datos en operaciones múltiples.
-4. **Variables de Entorno:** Desacoplamiento de credenciales sensibles mediante `python-dotenv` (`.env`).
+1. Clone the repository | Clonar el repositorio
 
----
+git clone https://github.com
+cd workingbetter-flask
 
-## Tecnologías Utilizadas
+2. Create and activate a virtual environment | Crear y activar entorno virtual
 
-- **Backend:** Python 3, Flask
-- **Base de Datos:** MySQL (Clever Cloud), PyMySQL
-- **Seguridad:** Bcrypt, Python-dotenv
-- **Frontend:** HTML5, CSS3, JavaScript, Jinja2, Bootstrap Icons
+python3 -m venv venv
 
----
+# On macOS/Linux:
 
-## Estructura del Proyecto
+source venv/bin/activate
 
-```text
-workingbetter_py/
-├── static/                 # Archivos estáticos (CSS, JS, imágenes y avatares)
-│   ├── css/
-│   ├── js/
-│   └── img_users/
-├── templates/              # Plantillas HTML con sintaxis Jinja2
-│   ├── index.html          # Página de inicio de sesión
-│   ├── registro.html       # Formulario de registro
-│   ├── main.html           # Tablero principal de tareas
-│   ├── modificar.html      # Edición de perfil de usuario
-│   └── ...                 # Componentes reutilizables (header, footer, tarjetas)
-├── app.py                  # Rutas y controladores principales de Flask
-├── db.py                   # Conexión a MySQL y consultas optimizadas
-├── requirements.txt        # Dependencias del proyecto
-├── .env                    # Variables de entorno (no incluido en el repositorio)
-└── .gitignore              # Archivos ignorados por Git
-```
+# On Windows:
 
----
+venv\Scripts\activate
 
-## Instalación y Ejecución Local
+3. Install dependencies | Instalar dependencias
 
-1. **Clonar el repositorio:**
+pip install -r requirements.txt
 
-   ```bash
-   git clone https://github.com
-   cd workingbetter-python
-   ```
+4. Configure environment variables | Configurar variables de entorno
 
-2. **Crear y activar un entorno virtual:**
+Create a .env file in the root directory based on .env.example and fill in your MySQL credentials:
 
-   ```bash
-   python3 -m venv venv
-   # En macOS / Linux:
-   source venv/bin/activate
-   # En Windows:
-   venv\Scripts\activate
-   ```
+SECRET_KEY=your_super_secret_key_here
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=working_better
 
-3. **Instalar las dependencias:**
+5. Run the application | Ejecutar la aplicación
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+python app.py
+Open your browser and navigate to http://127.0.0.1:5000.
 
-4. **Configurar las variables de entorno:**
-   Crea un archivo `.env` en la raíz del proyecto con tus credenciales de MySQL:
+Migration Journey (PHP ➡️ Python)
 
-   ```env
-   DB_HOST=host_mysql
-   DB_USER=usuario
-   DB_PASSWORD=contraseña
-   DB_NAME=nombre_base_datos
-   SECRET_KEY=una_clave_secreta_segura
-   ```
+This project demonstrates a complete backend modernization workflow:
 
-5. **Ejecutar la aplicación:**
-   ```bash
-   python app.py
-   ```
-   Abre tu navegador y accede a `http://127.0.0.1:5000`.
-# python_wb
+1. Direct Translation: Porting procedural PHP logic and MySQL queries to Flask and PyMySQL.
+2. Refactoring: Eliminating code duplication using Python decorators and helper functions.
+3. Architecture & ORM: Restructuring into Flask Blueprints and migrating to SQLAlchemy models with transactional integrity.
