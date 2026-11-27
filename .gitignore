@@ -7,3 +7,5 @@ __pycache__/
 .DS_Store
 static/img_users/*
 !static/img_users/.gitkeep
+.pytest_cache/
+
